@@ -1,9 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { Providers } from './providers'
+import "@/styles/globals.css";
+import { Inter as FontSans } from "next/font/google";
+import { cn } from "@/lib/utils";
+import dynamic from "next/dynamic";
 
-const inter = Inter({ subsets: ["latin"] });
+const Navbar = dynamic(() => import("@/components/global/Navbar"));
+
+
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
+
 
 export const metadata: Metadata = {
   title: "Garden Code",
@@ -16,9 +24,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-      <Providers>{children}</Providers></body>
+    <html lang="en" suppressHydrationWarning>
+      <head />
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          fontSans.variable
+        )}
+      >
+        <Navbar/>
+        {children}
+      </body>
     </html>
   );
 }
