@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { CircleUser, Menu, Package2, Search } from "lucide-react";
+import dynamic from "next/dynamic";
+
 
 import {
   Card,
@@ -27,6 +29,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
+const BtnTheme = dynamic(() => import("./btnTheme"));
 
 
 export default function Navbar() {
@@ -149,6 +152,7 @@ export default function Navbar() {
               <DropdownMenuItem>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+          <BtnTheme />
         </div>
       </header>
     </>
