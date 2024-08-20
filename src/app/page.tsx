@@ -3,14 +3,15 @@ import dynamic from "next/dynamic";
 
 // iport components dynamic
 const Hero = dynamic(() => import("@/components/UI/home/Hero"));
+const About = dynamic(() => import("@/components/UI/home/About"));
+const Resources = dynamic(() => import("@/components/UI/home/Resource"));
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <h1>hello </h1>
-      </main>
+      <About />
+      <Resources />
     </>
   );
 }
