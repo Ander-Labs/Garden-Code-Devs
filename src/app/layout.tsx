@@ -8,6 +8,7 @@ import dynamic from "next/dynamic";
 import GoogleAdsense from "@/scripts/GoogleAdsense";
 
 const Navbar = dynamic(() => import("@/components/global/Navbar"));
+const Footer = dynamic(() => import("@/components/global/footer"));
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -43,6 +44,7 @@ export default function RootLayout({
         >
           <Navbar />
           {children}
+          <Footer />
         </ThemeProvider>
         <GoogleAdsense pId="2964007773702778" />
       </body>

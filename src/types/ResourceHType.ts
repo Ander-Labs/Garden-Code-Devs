@@ -1,3 +1,6 @@
+//src/types/ResourceHType.ts
+
+
 export interface Card {
   id: number;
   title: string;
