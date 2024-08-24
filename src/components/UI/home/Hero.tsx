@@ -3,9 +3,9 @@ import { Button } from "@/components/ui/button";
 export default function Hero() {
   return (
     <>
-      <section className="w-full h-screen flex flex-col justify-center items-center ">
+      <section className="w-full py-16 md:py-32 flex flex-col justify-center items-center ">
         <div className="w-5/6 md:w-3/5 flex flex-col justify-center items-center">
-          <h1 className="scroll-m-20 text-center text-5xl font-extrabold tracking-tight lg:text-6xl px-4">
+          <h1 className="scroll-m-20 text-center text-4xl font-extrabold tracking-tight lg:text-6xl px-4">
             Encuentra todos los recursos para{" "}
             <span className="text-primary">empezar</span> o{" "}
             <span className="text-primary">aprender</span> algo nuevo, todo en
@@ -19,7 +19,7 @@ export default function Hero() {
             mucho más...
           </p>
         </div>
-        <div>
+        <div className="flex flex-wrap md:flex-grow justify-center ">
           <Button size="lg" className="mt-2 text-white p-4 px-6 ">
             Explorar Recursos
           </Button>

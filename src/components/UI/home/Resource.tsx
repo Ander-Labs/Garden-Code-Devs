@@ -24,7 +24,7 @@ export default function Resource() {
   return (
     <>
       <section className="w-full flex flex-col justify-center items-center py-10">
-        <h2 className=" w-5/6 md:w-3/5 scroll-m-20 text-center text-5xl font-extrabold tracking-tight lg:text-6xl px-4">
+        <h2 className=" w-5/6 md:w-3/5 scroll-m-20 text-center text-4xl font-extrabold tracking-tight lg:text-6xl px-4">
           Explorar los mejores<span className="text-primary"> recursos</span>{" "}
           para <span className="text-primary">desarrolladores</span>
         </h2>
@@ -36,7 +36,7 @@ export default function Resource() {
 
         <div className="w-full flex justify-center items-center px-4 gat-6 flex-col md:flex-wrap md:flex-row md:gap-6 mt-2">
           {CardResources.map((c) => (
-            <Card key={c.id} className="m-2 w-1/2 md:w-1/3 lg:w-1/4">
+            <Card key={c.id} className="m-2 w-full md:w-1/3 lg:w-1/4">
               <CardHeader>
                 {/* {c.icon}  */}
                 {Icons[c.icon]}

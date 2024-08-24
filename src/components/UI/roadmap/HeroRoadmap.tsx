@@ -7,7 +7,7 @@ export default function HeroRoadmap() {
     <>
       <section className="w-full h-screen flex flex-col  justify-center items-center">
         <div className="w-full flex flex-col justify-center items-center">
-          <h1 className="text-primary text-4xl md:text-5xl font-bold">
+          <h1 className="text-primary text-center text-4xl md:text-5xl font-bold">
             Roadmap Garden Code
           </h1>
           <p className="p-4 md:w-3/5 text-center md:px-6">
