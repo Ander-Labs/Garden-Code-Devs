@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 export default function About() {
   return (
     <>
-      <section className="w-full h-screen flex flex-col justify-center items-center py-10">
+      <section className="w-full flex flex-col justify-center items-center py-40">
         <h2 className="scroll-m-20 text-center text-5xl font-extrabold tracking-tight lg:text-6xl px-4">
           Que es <span className="text-primary">Garden Code</span> ?
         </h2>

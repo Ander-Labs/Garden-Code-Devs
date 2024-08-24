@@ -4,6 +4,7 @@ import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/global/theme-provider";
 
+
 import dynamic from "next/dynamic";
 import GoogleAdsense from "@/scripts/GoogleAdsense";
 
@@ -16,7 +17,10 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-  title: "Garden Code",
+  title: {
+    template: "%s | Garden Code",
+    default: "Garden Code",
+  },
   description:
     "plataforma de código abierto dedicada a proporcionar recursos valiosos para desarrolladores de todos los niveles. Nuestro objetivo es construir una comunidad donde los desarrolladores puedan acceder fácilmente a contenido educativo, herramientas útiles, y conectarse con influenciadores destacados en el mundo de la programación.",
 };
@@ -28,8 +32,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <head />
-
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
@@ -43,6 +45,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Navbar />
+
           {children}
           <Footer />
         </ThemeProvider>

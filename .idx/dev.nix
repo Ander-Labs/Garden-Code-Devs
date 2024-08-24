@@ -34,6 +34,8 @@
       "usernamehw.errorlens"
       "yzhang.markdown-all-in-one"
       "chamboug.js-auto-backticks"
+      "PulkitGangwar.nextjs-snippets"
+      "Tomi.xasnippets"
 
     ];
     workspace = {
