@@ -11,7 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-export function SignIn() {
+export function Page() {
   return (
     <Card className="mx-auto max-w-sm">
       <CardHeader>

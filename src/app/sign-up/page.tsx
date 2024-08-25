@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
@@ -11,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-export function SignUp() {
+export function Page() {
   return (
     <Card className="mx-auto max-w-sm">
       <CardHeader>
