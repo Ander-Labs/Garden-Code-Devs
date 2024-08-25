@@ -4,13 +4,13 @@ import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC4UxHk1I2FOC404hDnRSQ1HAoPPXjHHFA",
-  authDomain: "garden-code.firebaseapp.com",
-  projectId: "garden-code",
-  storageBucket: "garden-code.appspot.com",
-  messagingSenderId: "383595610414",
-  appId: "1:383595610414:web:c19322e09e8ead1a99fabf",
-  measurementId: "G-EJM0L5LGYG",
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_DTORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.FIREBASE_APP_ID,
+  measurementId: process.env.FIREBASE_MEASUREMENT_ID,
 };
 
 // Initialize Firebase

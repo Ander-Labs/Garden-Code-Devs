@@ -25,3 +25,23 @@ export const NavItems: ItemsNav[] = [
     href: "/resources",
   },
 ];
+
+
+export const ResourceNav: ItemsNav[] = [
+  {
+    name: "Dashboard",
+    href: "/resources",
+  },
+  {
+    name: "Webs",
+    href: "/resources/web",
+  },
+  {
+    name: "Repositorios",
+    href: "/resources/github",
+  },
+  {
+    name: "Influencers",
+    href: "/resources/inluencers",
+  },
+];
