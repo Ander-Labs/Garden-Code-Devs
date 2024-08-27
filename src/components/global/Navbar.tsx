@@ -1,23 +1,13 @@
 import Link from "next/link";
-import { CircleUser, Search, FolderCode } from "lucide-react";
+import {Search, FolderCode } from "lucide-react";
 import dynamic from "next/dynamic";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-
 import { Input } from "@/components/ui/input";
 
 
 const BtnTheme = dynamic(() => import("./btnTheme"));
 const ItemsNav = dynamic(() => import("./navigation/ItemsNav"));
 const NavResource = dynamic(() => import("./navigation/navResource"));
-
+const AcountSettings = dynamic(() => import("./navigation/acountSettings"));
 
 export default function Navbar() {
   return (
@@ -47,22 +37,7 @@ export default function Navbar() {
               />
             </div>
           </form>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="secondary" size="icon" className="rounded-full">
-                <CircleUser className="h-5 w-5" />
-                <span className="sr-only">Toggle user menu</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+         <AcountSettings/>
           <BtnTheme />
         </div>
       </header>
