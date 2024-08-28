@@ -20,8 +20,9 @@ const app = initializeApp(firebaseConfig);
 
 // Servicios de Firebase
 // export const analytics = getAnalytics(app);
-export const auth = getAuth(app);
-export const db = getFirestore(app); // Firestore
-export const rtdb = getDatabase(app); // Realtime Database
-export const githubProvider = new GithubAuthProvider();
-// export const emailProvider = new EmailAuthProvider();
+ const auth = getAuth(app);
+ const db = getFirestore(app); // Firestore
+ const rtdb = getDatabase(app); // Realtime Database
+//  const githubAuthProvider = new GithubAuthProvider();
+
+export { auth, db, rtdb };

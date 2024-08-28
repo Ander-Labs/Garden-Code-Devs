@@ -26,11 +26,15 @@ import { z } from "zod";
 import useSignUp from "@/hooks/Auth/useSignUp";
 import { SignUpSchema } from "@/schemas/auth/SignUp";
 
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/hooks/Auth/useAuth";
+
 const BtnAuth = dynamic(() => import("./BtnAuth"));
 
 export default function SignUp() {
   const { signUpWithEmail } = useSignUp();
-
+  const { user } = useAuth();
+  const router = useRouter();
   // Configuración del formulario con validación de Zod
   const form = useForm<z.infer<typeof SignUpSchema>>({
     resolver: zodResolver(SignUpSchema),
@@ -53,7 +57,7 @@ export default function SignUp() {
       githubUserName
     );
     if (user) {
-      // Redirigir o mostrar un mensaje de éxito
+      router.push("/resources");
       console.log("User signed up successfully:", user);
     }
   };
