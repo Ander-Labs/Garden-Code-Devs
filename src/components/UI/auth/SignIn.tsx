@@ -26,28 +26,29 @@ import { z } from "zod";
 import { SignInZ } from "@/schemas/auth/SignIn";
 import useSignIn from "@/hooks/Auth/useSignIn";
 import { useAuth } from "@/hooks/Auth/useAuth";
+import { useRouter } from "next/navigation";
 
 const BtnAuth = dynamic(() => import("./BtnAuth"));
 
 export default function SignIn() {
-   const { signInWithEmail } = useSignIn();
-   const { user } = useAuth();
+  const { signInWithEmail } = useSignIn();
+  const { user } = useAuth();
+  const router = useRouter();
 
-   const form = useForm<z.infer<typeof SignInZ>>({
-     resolver: zodResolver(SignInZ),
-     defaultValues: {
-       email: "",
-       password: "",
-     },
-   });
+  const form = useForm<z.infer<typeof SignInZ>>({
+    resolver: zodResolver(SignInZ),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
 
-   async function onSubmit(values: z.infer<typeof SignInZ>) {
-     const user = await signInWithEmail(values.email, values.password);
-     if (user) {
-       // Redirect or show success message
-     }
-   }
-
+  async function onSubmit(values: z.infer<typeof SignInZ>) {
+    const user = await signInWithEmail(values.email, values.password);
+    if (user) {
+      router.push("/");
+    }
+  }
 
   return (
     <>

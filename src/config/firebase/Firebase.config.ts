@@ -1,7 +1,7 @@
 //src/config/firebase/Firebase.config.ts
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, GithubAuthProvider, EmailAuthProvider } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getDatabase } from "firebase/database";
 
@@ -23,6 +23,5 @@ const app = initializeApp(firebaseConfig);
  const auth = getAuth(app);
  const db = getFirestore(app); // Firestore
  const rtdb = getDatabase(app); // Realtime Database
-//  const githubAuthProvider = new GithubAuthProvider();
 
 export { auth, db, rtdb };

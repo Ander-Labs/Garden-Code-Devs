@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/card";
 import { useAuth } from "@/hooks/Auth/useAuth";
 import Image from "next/image";
+import { CircleUser } from "lucide-react";
 
 export default function Account() {
   const { user } = useAuth();
@@ -18,12 +19,6 @@ export default function Account() {
       <section className="w-full h-screen flex justify-center items-center">
         <Card>
           <CardHeader>
-            <CardTitle>Welcome, {user?.displayName || "Guest"}</CardTitle>
-            <CardDescription>
-              {user?.email || "No email available"}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
             {user?.photoURL ? (
               <Image
                 src={user.photoURL}
@@ -33,12 +28,20 @@ export default function Account() {
                 className="rounded-full"
               />
             ) : (
-              <p>No profile picture available</p>
+              <CircleUser size={80} />
             )}
+            <CardTitle>Welcome, {user?.displayName || "User:"}</CardTitle>
+            <CardDescription>
+              {user?.email || "No email available"}
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
             <p>User ID: {user?.uid}</p>
+            <p>Email: {user?.email}</p>
+            {/* <p>GitHub: {user?.github || "No GitHub available" }</p> */}
           </CardContent>
           <CardFooter>
-            <p>Thank you for being a part of our platform!</p>
+            <p>Gracias por formar parte de nuestra plataforma.</p>
           </CardFooter>
         </Card>
       </section>
