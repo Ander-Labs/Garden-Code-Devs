@@ -3,7 +3,7 @@ import "@/styles/globals.css";
 import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/global/theme-provider";
-
+import { Toaster } from "@/components/ui/toaster";
 
 import dynamic from "next/dynamic";
 import GoogleAdsense from "@/scripts/GoogleAdsense";
@@ -48,6 +48,7 @@ export default function RootLayout({
           <Navbar />
 
           {children}
+          <Toaster />
           <Footer />
           <NavMobile />
         </ThemeProvider>

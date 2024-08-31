@@ -1,12 +1,13 @@
 //src/config/firebase/Firebase.config.ts
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+// import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getDatabase } from "firebase/database";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
   authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
   projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
   storageBucket: process.env.NEXT_PUBLIC_FIREBASE_DTORAGE_BUCKET,
@@ -20,8 +21,8 @@ const app = initializeApp(firebaseConfig);
 
 // Servicios de Firebase
 // export const analytics = getAnalytics(app);
- const auth = getAuth(app);
- const db = getFirestore(app); // Firestore
- const rtdb = getDatabase(app); // Realtime Database
-
-export { auth, db, rtdb };
+const auth = getAuth(app);
+const db = getFirestore(app); // Firestore
+const rtdb = getDatabase(app); // Realtime Database
+const storage = getStorage(app);
+export { auth, db, rtdb, storage };

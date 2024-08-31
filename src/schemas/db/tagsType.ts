@@ -1,8 +1,8 @@
+//src/shemas/db/tagsType.ts
 import { z } from "zod";
 
 export const CategorySchema = z.object({
-  id: z.string().uuid(),
-  name: z.string(),
+  name: z.string().min(1, "Category name is required"),
 });
 
 export const TagSchema = z.object({
