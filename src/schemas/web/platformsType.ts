@@ -6,7 +6,7 @@ export const PlatformSchema = z.object({
   description: z.string(),
   url: z.string().url(),
   categoryId: z.string(), // Relación a la tabla de categorías
-  tagIds: z.array(z.string()), // Relación a la tabla de tags
+  tags: z.array(z.string()), // Relación a la tabla de tags
   logoUrl: z.string().url(),
   contributorId: z.string(), // Relación al contribuidor
 });

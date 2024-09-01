@@ -9,28 +9,28 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Hash } from "lucide-react";
+import { TagIcon } from "lucide-react";
 
-const FormPost = dynamic(() => import("./FormPost"));
+const FormAdd = dynamic(() => import("./FormAdd"));
 
-export default function DialogForm() {
+export default function DialogFormTags() {
   return (
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <Button>
-            <Hash size={"1.5em"} />
-            Nueva Categoria
+          <Button className="bg-blue-500 hover:bg-blue-600 text-white">
+            <TagIcon size={"1.5em"} />
+            New Tag
           </Button>
         </DialogTrigger>
         <DialogContent className="w-5/6 space-y-6 rounded-xl">
           <DialogHeader>
-            <DialogTitle>Agregar una nueva categoria </DialogTitle>
+            <DialogTitle>Agregar una nueva Tag </DialogTitle>
             <DialogDescription>
-              Esta acción agregara una nueva categoría para web/plataform.
+              Esta acción agregara una nueva Tag para web/plataform.
             </DialogDescription>
           </DialogHeader>
-          <FormPost />
+          <FormAdd />
         </DialogContent>
       </Dialog>
     </>

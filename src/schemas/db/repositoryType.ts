@@ -7,7 +7,7 @@ export const RepositorySchema = z.object({
   owner: z.string(),
   url: z.string().url(),
   stars: z.number(),
-  tagIds: z.array(z.string()), // Relación a la tabla de tags
+  tags: z.array(z.string()), // Relación a la tabla de tags
   programmingLanguageIds: z.array(z.string()), // Relación a la tabla de lenguajes de programación
   contributorId: z.string(), // Relación al contribuyente
 });

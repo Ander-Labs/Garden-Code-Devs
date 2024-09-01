@@ -23,6 +23,15 @@ export default function FormRegister() {
 
   const form = useForm<Platform>({
     resolver: zodResolver(PlatformSchema),
+    defaultValues: {
+      name: "",
+      description: "",
+      url: "",
+      categoryId: "",
+      tags: [""],
+      logoUrl: "",
+      contributorId: "",
+    },
   });
 
   function onSubmit(data: Platform) {

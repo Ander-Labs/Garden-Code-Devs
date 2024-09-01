@@ -3,9 +3,9 @@ import dynamic from "next/dynamic";
 const BreadcrumbRoute = dynamic(
   () => import("@/components/global/BreadcrumbRoute")
 );
-const DialogForm = dynamic(
-  () => import("@/components/UI/resource/category/DialogForm")
-);
+
+const AddButton = dynamic(() => import("./addButton"));
+
 
 export default function MainContent({
   children,
@@ -18,7 +18,7 @@ export default function MainContent({
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
           <div className="flex items-center justify-between">
             <BreadcrumbRoute />
-            <DialogForm />
+            <AddButton />
           </div>
           <div
             className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"

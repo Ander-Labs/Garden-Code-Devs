@@ -4,7 +4,7 @@ const FormPost = dynamic(
   () => import("@/components/UI/resource/category/FormPost")
 );
 const DialogForm = dynamic(
-  () => import("@/components/UI/resource/category/DialogForm")
+  () => import("@/components/UI/resource/category/DialogFormCategory")
 );
 
 export default function page() {

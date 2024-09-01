@@ -6,13 +6,11 @@ export const CategorySchema = z.object({
 });
 
 export const TagSchema = z.object({
-  id: z.string().uuid(),
-  name: z.string(),
+  name: z.string().min(1, "Tag name is required"),
 });
 
 export const ProgrammingLanguageSchema = z.object({
-  id: z.string().uuid(),
-  name: z.string(),
+  name: z.string().min(1, "Programming Language name is required"),
 });
 
 export type ProgrammingLanguage = z.infer<typeof ProgrammingLanguageSchema>;
