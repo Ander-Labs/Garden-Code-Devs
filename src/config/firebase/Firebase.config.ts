@@ -4,7 +4,6 @@ import { getAnalytics, isSupported } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getDatabase } from "firebase/database";
-import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
@@ -29,8 +28,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-export const auth = getAuth(app);
-export const db = getFirestore(app); // Firestore
-export const rtdb = getDatabase(app); // Realtime Database
-export const storage = getStorage(app);
-// export { auth, db, rtdb, storage };
+ const auth = getAuth(app);
+ const db = getFirestore(app); // Firestore
+ const rtdb = getDatabase(app); // Realtime Database
+ export { auth, db, rtdb};

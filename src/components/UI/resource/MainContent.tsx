@@ -6,6 +6,9 @@ const BreadcrumbRoute = dynamic(
 
 const AddButton = dynamic(() => import("./addButton"));
 
+const SheetAddWeb = dynamic(() => import("./web/FormPost/SheetAddWeb"), {
+  loading: () => <p>Loading...</p>,
+});
 
 export default function MainContent({
   children,
@@ -18,6 +21,7 @@ export default function MainContent({
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
           <div className="flex items-center justify-between">
             <BreadcrumbRoute />
+            <SheetAddWeb />
             <AddButton />
           </div>
           <div

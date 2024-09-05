@@ -1,3 +1,5 @@
+//src/shemas/web/platformsType.ts
+
 import { z } from "zod";
 
 export const PlatformSchema = z.object({
@@ -5,10 +7,13 @@ export const PlatformSchema = z.object({
   name: z.string(),
   description: z.string(),
   url: z.string().url(),
-  categoryId: z.string(), // Relación a la tabla de categorías
-  tags: z.array(z.string()), // Relación a la tabla de tags
-  logoUrl: z.string().url(),
-  contributorId: z.string(), // Relación al contribuidor
+  categorys: z.array(z.string()),
+  tags: z.array(z.string()),
+  contributor: z.object({
+    username: z.string(),
+    uid: z.string(),
+    avatar: z.string().url(),
+}), // Relación al contribuidor
 });
 
 export type Platform = z.infer<typeof PlatformSchema>;

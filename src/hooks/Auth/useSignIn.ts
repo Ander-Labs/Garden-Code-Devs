@@ -40,25 +40,27 @@ const useSignIn = () => {
       const credential = GithubAuthProvider.credentialFromResult(result);
       const token = credential?.accessToken;
 
-      // Envía el token al API route para almacenar en la cookie
-      await fetch("/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ token }),
-      });
+  if (token) {
+    // Envía el token al API route para almacenarlo en la cookie
+    await fetch("/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ token }),
+    });
+  }
 
-      // Obtener los datos necesarios de GitHub
-      const userData = {
-        uid: user.uid,
-        displayName: user.displayName || "Anonymous",
-        email: user.email,
-        photoURL: user.photoURL,
-        githubUsername: user.displayName
-          ? user.displayName.split(" ")[0]
-          : "Anonymous", // GitHub username correcto
-      };
+  // Obtener los datos necesarios de GitHub
+  const userData = {
+    uid: user.uid,
+    displayName: user.displayName || "Anonymous",
+    email: user.email,
+    photoURL: user.photoURL,
+    githubUserName: user.displayName
+      ? user.displayName.split(" ")[0]
+      : "Anonymous", // GitHub username correcto
+  };
 
       // Guardar los datos del usuario en Firestore
       const userRef = doc(db, "users", user.uid);

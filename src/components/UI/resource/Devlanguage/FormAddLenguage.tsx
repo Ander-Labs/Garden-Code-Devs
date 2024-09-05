@@ -17,7 +17,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/hooks/use-toast";
 import { Category, CategorySchema } from "@/schemas/db/tagsType";
-import { useAddTags } from "@/hooks/db/tags/useAddTags";
 import { useAddLenguage } from "@/hooks/db/Devlanguage/useAddLanguage";
 
 export default function FormAddLenguage() {

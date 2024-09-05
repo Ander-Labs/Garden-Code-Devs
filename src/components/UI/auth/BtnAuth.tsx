@@ -24,8 +24,14 @@ export default function BtnAuth() {
   };
 
   return (
-    <Button variant="outline" className="w-full mt-2" onClick={handleGithubLogin}>
-      <GitHubLogoIcon /> <span className="pl-2 font-medium">GitHub</span>
-    </Button>
+    <>
+      <Button
+        variant="outline"
+        className="w-full mt-2"
+        onClick={handleGithubLogin}
+      >
+        <GitHubLogoIcon /> <span className="pl-2 font-medium">GitHub</span>
+      </Button>
+    </>
   );
 }
