@@ -1,6 +1,6 @@
 // src/hooks/db/category/useCategories.ts
 import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 import { db } from "@/config/firebase/Firebase.config";
 
 export const useGetTags = () => {
@@ -9,37 +9,41 @@ export const useGetTags = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-
-        // Verificar si ya hay categorías en localStorage
-        const savedTags = localStorage.getItem("tags");
-        if (savedTags) {
-          setTags(JSON.parse(savedTags));
-          setLoading(false);
-          return;
-        }
-
-        // Si no están en localStorage, consultarlas de Firestore
-        const querySnapshot = await getDocs(collection(db, "tags"));
-        const categoriesArray: string[] = [];
-        querySnapshot.forEach((doc) => {
-          categoriesArray.push(doc.data().name); // Asumiendo que cada categoría tiene un campo "name"
-        });
-
-        // Guardar las categorías en el estado y en localStorage
-        setTags(categoriesArray);
-        localStorage.setItem("categories", JSON.stringify(categoriesArray));
-      } catch (error) {
-        setError("Error al obtener las categorías.");
-      } finally {
-        setLoading(false);
-      }
+    // Función para sincronizar tags de Firestore y localStorage
+    const syncTags = (tagsArray: string[]) => {
+      setTags(tagsArray);
+      localStorage.setItem("tags", JSON.stringify(tagsArray));
     };
 
-    fetchCategories();
+    // Verificar si ya hay tags en localStorage
+    const savedTags = localStorage.getItem("tags");
+    if (savedTags) {
+      setTags(JSON.parse(savedTags));
+      setLoading(false);
+    }
+
+    // Escuchar en tiempo real los cambios en la colección "tags"
+    const unsubscribe = onSnapshot(
+      collection(db, "tags"),
+      (snapshot) => {
+        const tagsArray: string[] = [];
+        snapshot.forEach((doc) => {
+          tagsArray.push(doc.data().name); // Asumiendo que cada tag tiene un campo "name"
+        });
+
+        // Actualizar tags en el estado y en localStorage
+        syncTags(tagsArray);
+        setLoading(false);
+      },
+      (error) => {
+        console.error("Error al escuchar cambios en los tags:", error);
+        setError("Error al obtener los tags.");
+        setLoading(false);
+      }
+    );
+
+    // Limpiar la suscripción cuando el componente se desmonta
+    return () => unsubscribe();
   }, []);
 
   return { tags, loading, error };

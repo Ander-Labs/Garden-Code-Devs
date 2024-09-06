@@ -2,7 +2,7 @@
 
 import { PlatformSchema } from "@/schemas/web/platformsType";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { addPlatformToFirestore } from "@/hooks/db/web/addPlatformToFirestore"; 
+import { addPlatformToFirestore } from "@/hooks/db/web/addPlatformToFirestore";
 
 export default async function handler(
   req: NextApiRequest,

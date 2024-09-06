@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-
+import TooltipGlobal from "@/components/global/tooltipGlobal";
 import {
   Dialog,
   DialogContent,
@@ -18,10 +18,13 @@ export default function DialogFormTags() {
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <Button className="bg-blue-500 hover:bg-blue-600 text-white">
-            <TagIcon size={"1.5em"} />
-            New Tag
-          </Button>
+          
+            <Button className="bg-red-500 hover:bg-red-600 text-white">
+            <TooltipGlobal tooltipContent="Agregar una nueva Tag">
+              <TagIcon size={"1.5em"} />
+            </TooltipGlobal>
+            </Button>
+         
         </DialogTrigger>
         <DialogContent className="w-5/6 space-y-6 rounded-xl">
           <DialogHeader>

@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-
+import TooltipGlobal from "@/components/global/tooltipGlobal";
 import {
   Dialog,
   DialogContent,
@@ -9,7 +9,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Hash } from "lucide-react";
+import { ListPlus } from "lucide-react";
 
 const FormPost = dynamic(() => import("./FormPost"));
 
@@ -18,9 +18,10 @@ export default function DialogFormCategory() {
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <Button className="text-white">
-            <Hash size={"1.5em"} />
-            New Category
+          <Button className="bg-blue-500 hover:bg-blue-600 text-white">
+            <TooltipGlobal tooltipContent="Agregar una nueva categoría">
+              <ListPlus size={"1.5em"} />
+            </TooltipGlobal>
           </Button>
         </DialogTrigger>
         <DialogContent className="w-5/6 space-y-6 rounded-xl">

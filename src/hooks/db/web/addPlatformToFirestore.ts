@@ -1,4 +1,4 @@
-// src/
+// src/hooks/db/web/addPlatformToFirestore.ts
 import { getFirestore, collection, addDoc } from "firebase/firestore";
 import { Platform } from "@/schemas/web/platformsType";
 

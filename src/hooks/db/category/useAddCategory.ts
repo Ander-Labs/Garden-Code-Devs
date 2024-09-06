@@ -13,7 +13,16 @@ export const useAddCategory = () => {
     setError(null);
 
     try {
-      // Check if category already exists
+      // Verificar si ya existe la categoría en localStorage
+      const savedCategories = localStorage.getItem("categories");
+      if (savedCategories) {
+        const categoriesArray = JSON.parse(savedCategories) as string[];
+        if (categoriesArray.includes(category.name)) {
+          throw new Error("Category already exists in local storage");
+        }
+      }
+
+      // Si no está en localStorage, realizar consulta en Firebase
       const q = query(
         collection(db, "categories"),
         where("name", "==", category.name)
@@ -21,14 +30,19 @@ export const useAddCategory = () => {
       const querySnapshot = await getDocs(q);
 
       if (!querySnapshot.empty) {
-        throw new Error("Category already exists");
+        throw new Error("Category already exists in Firebase");
       }
 
-      // Add new category without specifying "id" (Firebase will generate it)
+      // Añadir nueva categoría en Firebase
       await addDoc(collection(db, "categories"), category);
 
-      setLoading(false);
+      // Actualizar las categorías en localStorage
+      const updatedCategories = savedCategories
+        ? [...JSON.parse(savedCategories), category.name]
+        : [category.name];
+      localStorage.setItem("categories", JSON.stringify(updatedCategories));
 
+      setLoading(false);
       return true;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to add category");

@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-
+import TooltipGlobal from "@/components/global/tooltipGlobal";
 import { BadgePlus } from "lucide-react";
 import dynamic from "next/dynamic";
 
@@ -21,8 +21,10 @@ export default function SheetAddWeb() {
     <>
       <Sheet>
         <SheetTrigger asChild>
-          <Button className="bg-blue-600 text-white hover:bg-blue-500 flex justify-around items center">
-            <BadgePlus className="pr-2" /> New Web
+          <Button className="bg-green-600 text-white hover:bg-green-700 flex justify-around items center">
+            <TooltipGlobal tooltipContent={"Sugerir plataforma/web"}>
+              <BadgePlus size={"1.5em"} />
+            </TooltipGlobal>
           </Button>
         </SheetTrigger>
         <SheetContent

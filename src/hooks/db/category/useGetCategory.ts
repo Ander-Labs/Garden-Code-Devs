@@ -1,6 +1,6 @@
 // src/hooks/db/category/useCategories.ts
 import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, onSnapshot, getDocs } from "firebase/firestore";
 import { db } from "@/config/firebase/Firebase.config";
 
 export const useGetCategories = () => {
@@ -9,37 +9,41 @@ export const useGetCategories = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        setLoading(true);
-        setError(null);
+    // Función para sincronizar categorías de Firestore y localStorage
+    const syncCategories = (categoriesArray: string[]) => {
+      setCategories(categoriesArray);
+      localStorage.setItem("categories", JSON.stringify(categoriesArray));
+    };
 
-        // Verificar si ya hay categorías en localStorage
-        const savedCategories = localStorage.getItem("categories");
-        if (savedCategories) {
-          setCategories(JSON.parse(savedCategories));
-          setLoading(false);
-          return;
-        }
+    // Verificar si ya hay categorías en localStorage
+    const savedCategories = localStorage.getItem("categories");
+    if (savedCategories) {
+      setCategories(JSON.parse(savedCategories));
+      setLoading(false);
+    }
 
-        // Si no están en localStorage, consultarlas de Firestore
-        const querySnapshot = await getDocs(collection(db, "categories"));
+    // Escuchar en tiempo real los cambios en la colección "categories"
+    const unsubscribe = onSnapshot(
+      collection(db, "categories"),
+      (snapshot) => {
         const categoriesArray: string[] = [];
-        querySnapshot.forEach((doc) => {
+        snapshot.forEach((doc) => {
           categoriesArray.push(doc.data().name); // Asumiendo que cada categoría tiene un campo "name"
         });
 
-        // Guardar las categorías en el estado y en localStorage
-        setCategories(categoriesArray);
-        localStorage.setItem("categories", JSON.stringify(categoriesArray));
-      } catch (error) {
+        // Actualizar categorías en el estado y en localStorage
+        syncCategories(categoriesArray);
+        setLoading(false);
+      },
+      (error) => {
+        console.error("Error al escuchar cambios en las categorías:", error);
         setError("Error al obtener las categorías.");
-      } finally {
         setLoading(false);
       }
-    };
+    );
 
-    fetchCategories();
+    // Limpiar la suscripción cuando el componente se desmonta
+    return () => unsubscribe();
   }, []);
 
   return { categories, loading, error };
