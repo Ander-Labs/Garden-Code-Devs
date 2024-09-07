@@ -1,8 +1,8 @@
 // src/components/UI/resource/web/FormPost/FormRegister.tsx
 "use client";
 import { useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -68,7 +68,7 @@ export default function FormRegister() {
 
   async function onSubmit(data: Platform) {
     try {
-      const response = await fetch("/api/web/register-platform", {
+      const response = await fetch("/api/web/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
