@@ -3,7 +3,6 @@
 import { z } from "zod";
 
 export const PlatformSchema = z.object({
-  id: z.string().uuid(),
   name: z.string(),
   description: z.string(),
   url: z.string().url(),

@@ -2,7 +2,9 @@
 //src/app/api/web/register/route.ts
 import { NextResponse } from "next/server";
 import { addPlatformToFirestore } from "@/hooks/db/web/addPlatformToFirestore";
-import { PlatformSchema } from "@/schemas/web/platformsType";
+import { PlatformSchema} from "@/schemas/web/platformsType";
+
+
 
 // Función para manejar el POST request
 export async function POST(req: Request) {
