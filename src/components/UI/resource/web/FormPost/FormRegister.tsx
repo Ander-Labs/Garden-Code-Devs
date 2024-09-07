@@ -67,13 +67,14 @@ export default function FormRegister() {
   };
 
   async function onSubmit(data: Platform) {
+    console.log("Form data:", data);
     try {
       const response = await fetch("/api/web/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-
+      console.log("Response:", response);
       if (!response.ok) {
         const error = await response.json();
         throw new Error(error.error);
@@ -106,7 +107,11 @@ export default function FormRegister() {
               <FormItem>
                 <FormLabel>Categorías</FormLabel>
                 <FormControl>
-                  <Category onSelectCategories={handleCategorySelect} />
+                  <Category
+                    selectedCategories={selectedCategories}
+                    // Pasamos el estado desde el padre
+                    onSelectCategories={handleCategorySelect} // Actualizamos el estado desde el componente hijo
+                  />
                 </FormControl>
                 <FormDescription>
                   Selecciona las categorías que correspondan.
@@ -135,16 +140,18 @@ export default function FormRegister() {
               <FormItem>
                 <FormLabel>Tags</FormLabel>
                 <FormControl>
-                  <Tags onSelectTags={handleTagSelect} />
+                  <Tags
+                    selectedTags={selectedTags} // Pasamos el estado desde el padre
+                    onSelectTags={handleTagSelect} // Actualizamos el estado desde el componente hijo
+                  />
                 </FormControl>
                 <FormDescription>
-                  Selecciona las Tags que correspondan.
+                  Selecciona las tags que correspondan.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
-
           {/* Mostrar tags seleccionadas */}
           {selectedTags.length > 0 && (
             <div className="mt-4">
@@ -158,7 +165,7 @@ export default function FormRegister() {
               </ul>
             </div>
           )}
-          <Button type="submit">Submit</Button>
+          <Button type="submit">Add Web</Button>
         </form>
       </Form>
     </>
