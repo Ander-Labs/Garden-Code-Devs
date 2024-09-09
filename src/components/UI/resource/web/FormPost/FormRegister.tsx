@@ -1,8 +1,8 @@
 // src/components/UI/resource/web/FormPost/FormRegister.tsx
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from '@hookform/resolvers/zod';
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -19,6 +19,7 @@ import { useToast } from "@/components/ui/hooks/use-toast";
 import { useAuth } from "@/hooks/Auth/useAuth";
 import { useUserData } from "@/hooks/db/users/useUserData";
 import { Skeleton } from "@/components/ui/skeleton";
+import { addPlatformToFirestore } from "@/hooks/db/web/addPlatformToFirestore";
 
 const GeneralInfo = dynamic(() => import("./GeneralInfo"), {
   loading: () => <Skeleton className="w-auto h-[80px] rounded-xl" />,
@@ -34,11 +35,12 @@ const Tags = dynamic(() => import("./Tags"), {
 
 export default function FormRegister() {
   const { toast } = useToast();
-
   const { user } = useAuth();
   const { userData } = useUserData(user?.uid);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [validationError, setValidationError] = useState<string | null>(null);
 
   const form = useForm<Platform>({
     resolver: zodResolver(PlatformSchema),
@@ -49,48 +51,60 @@ export default function FormRegister() {
       categorys: [],
       tags: [],
       contributor: {
-        username: userData?.githubUserName || "",
-        uid: userData?.uid || "",
-        avatar: userData?.photoURL || "",
+        username: userData?.githubUserName || "Loading...",
+        uid: userData?.userId || userData?.uid || "Loading...",
       },
     },
   });
 
+  useEffect(() => {
+    if (userData) {
+      form.setValue("contributor.username", userData.githubUserName);
+      form.setValue("contributor.uid", userData.userId || userData.uid);
+    }
+  }, [userData, form]);
+
   const handleCategorySelect = (selectedCategories: string[]) => {
     setSelectedCategories(selectedCategories);
-    form.setValue("categorys", selectedCategories);
+    form.setValue("categorys", selectedCategories); // Asegúrate de actualizar el valor del formulario correctamente
   };
 
   const handleTagSelect = (selectedTags: string[]) => {
     setSelectedTags(selectedTags);
-    form.setValue("tags", selectedTags);
+    form.setValue("tags", selectedTags); // Asegúrate de actualizar el valor del formulario correctamente
   };
 
   async function onSubmit(data: Platform) {
-    console.log("Form data:", data);
+    setIsSubmitting(true);
+    setValidationError(null);
     try {
       const response = await fetch("/api/web/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      console.log("Response:", response);
+
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error);
+        const errorData = await response.json();
+        throw new Error(
+          errorData.error || errorData.details || "Unknown error occurred"
+        );
       }
 
-      const result = await response.json();
+      await addPlatformToFirestore(data);
       toast({
         title: "¡Éxito!",
-        description: "La plataforma ha sido registrada con éxito.",
+        description: `La plataforma ha sido registrada con éxito. `,
       });
     } catch (error: any) {
+      console.error("Error saving platform:", error);
       toast({
         title: "Error",
         description: `Ocurrió un error: ${error.message}`,
         variant: "destructive",
       });
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -99,7 +113,7 @@ export default function FormRegister() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <GeneralInfo control={form.control} />
-          {/* Input de logoUrl */}
+          {/* Input de categorías */}
           <FormField
             control={form.control}
             name="categorys"
@@ -109,8 +123,7 @@ export default function FormRegister() {
                 <FormControl>
                   <Category
                     selectedCategories={selectedCategories}
-                    // Pasamos el estado desde el padre
-                    onSelectCategories={handleCategorySelect} // Actualizamos el estado desde el componente hijo
+                    onSelectCategories={handleCategorySelect}
                   />
                 </FormControl>
                 <FormDescription>
@@ -133,6 +146,8 @@ export default function FormRegister() {
               </ul>
             </div>
           )}
+
+          {/* Input de tags */}
           <FormField
             control={form.control}
             name="tags"
@@ -141,8 +156,8 @@ export default function FormRegister() {
                 <FormLabel>Tags</FormLabel>
                 <FormControl>
                   <Tags
-                    selectedTags={selectedTags} // Pasamos el estado desde el padre
-                    onSelectTags={handleTagSelect} // Actualizamos el estado desde el componente hijo
+                    selectedTags={selectedTags}
+                    onSelectTags={handleTagSelect}
                   />
                 </FormControl>
                 <FormDescription>
@@ -165,7 +180,17 @@ export default function FormRegister() {
               </ul>
             </div>
           )}
-          <Button type="submit">Add Web</Button>
+
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="text-white font-semibold"
+          >
+            {isSubmitting ? "Submitting..." : "Add Web"}
+          </Button>
+          {validationError && (
+            <p className="text-red-500 mt-2">Error: {validationError}</p>
+          )}
         </form>
       </Form>
     </>

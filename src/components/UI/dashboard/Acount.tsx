@@ -13,20 +13,18 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAuth } from "@/hooks/Auth/useAuth";
 import { CircleUser } from "lucide-react";
 import Link from "next/link";
-import { useUserData } from "@/hooks/db/users/useUserData";
 import { ExternalLink } from "lucide-react";
+import { useUserStore } from "@/Global/Auth/useUserStore";
 
 export default function Account() {
   const { user } = useAuth();
-  const { userData, loading, error } = useUserData(user?.uid);
 
-  if (loading) {
-    return <p>Loading...</p>;
+    const { userData } = useUserStore();
+
+  if (!userData) {
+    return <p>Cargando los datos del usuario...</p>;
   }
 
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
 
   return (
     <>
@@ -56,25 +54,25 @@ export default function Account() {
               Welcome, {userData?.githubUserName || "User:"}
             </CardTitle>
             <CardDescription>
-              {userData?.displayName || "No display name provided"}
+              {userData?.displayName || "No disponible"}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <span className="font-bold text-primary">User ID:</span>
-            <p> {user?.uid}</p>
+            <p> {user?.uid || "No disponible"}</p>
             <span className="font-bold text-primary">Email:</span>
-            <p>{userData?.email}</p>
+            <p>{userData?.email || "No disponible"}</p>
             <span className="font-bold text-primary">Github UserName:</span>
 
             <p className="flex justify-start items-center">
-              {userData?.githubUserName}{" "}
+              {userData?.githubUserName || "No disponible"}{" "}
               <Link
                 href={`https://github.com/${userData?.githubUserName}`}
                 target="_blank"
                 className="text-blue-500 hover:underline"
               >
                 {" "}
-                <ExternalLink size={20}  />{" "}
+                <ExternalLink size={20} />{" "}
               </Link>{" "}
             </p>
           </CardContent>

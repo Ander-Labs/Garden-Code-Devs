@@ -22,13 +22,14 @@ export default function Tags({
       ? selectedTags.filter((t) => t !== tag)
       : [...selectedTags, tag];
 
-    onSelectTags(updatedTags); // Pasar los tags actualizados al padre
+    onSelectTags(updatedTags);
   };
 
   if (loading) return <p>Cargando tags...</p>;
   if (error) return <p>{error}</p>;
 
   return (
+    <>
     <CommandTheme title="Tags">
       {tags.map((tag) => (
         <div key={tag} className="flex items-center space-x-2 py-2">
@@ -40,6 +41,7 @@ export default function Tags({
           <Label htmlFor={tag}>{tag}</Label>
         </div>
       ))}
-    </CommandTheme>
+      </CommandTheme>
+    </>
   );
 }

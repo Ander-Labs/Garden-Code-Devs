@@ -22,24 +22,26 @@ export default function Category({
       ? selectedCategories.filter((c) => c !== category)
       : [...selectedCategories, category];
 
-    onSelectCategories(updatedCategories); // Pasar las categorías actualizadas al padre
+    onSelectCategories(updatedCategories);
   };
 
   if (loading) return <p>Cargando categorías...</p>;
   if (error) return <p>{error}</p>;
 
   return (
-    <CommandTheme title="Categorías">
-      {categories.map((category) => (
-        <div key={category} className="flex items-center space-x-2 py-2">
-          <Checkbox
-            id={category}
-            checked={selectedCategories.includes(category)}
-            onCheckedChange={() => handleCategoryChange(category)}
-          />
-          <Label htmlFor={category}>{category}</Label>
-        </div>
-      ))}
-    </CommandTheme>
+    <>
+      <CommandTheme title="Categorías">
+        {categories.map((category) => (
+          <div key={category} className="flex items-center space-x-2 py-2">
+            <Checkbox
+              id={category}
+              checked={selectedCategories.includes(category)}
+              onCheckedChange={() => handleCategoryChange(category)}
+            />
+            <Label htmlFor={category}>{category}</Label>
+          </div>
+        ))}
+      </CommandTheme>
+    </>
   );
 }

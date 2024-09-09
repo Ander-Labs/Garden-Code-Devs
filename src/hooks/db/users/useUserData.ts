@@ -2,9 +2,10 @@
 import { useEffect, useState } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "@/config/firebase/Firebase.config";
+import { useUserStore } from "@/Global/Auth/useUserStore"; // Asegúrate que la ruta sea correcta
 
 export const useUserData = (userId: string | undefined) => {
-  const [userData, setUserData] = useState<any>(null);
+  const { userData, setUserData } = useUserStore();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -44,7 +45,7 @@ export const useUserData = (userId: string | undefined) => {
 
     // Cleanup de la suscripción cuando el componente se desmonta
     return () => unsubscribe();
-  }, [userId]);
+  }, [userId, setUserData]);
 
   return { userData, loading, error };
 };
