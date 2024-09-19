@@ -31,7 +31,7 @@
     "fast-glob": "^3.3.2",
     "firebase": "^10.13.1",
     "lucide-react": "^0.439.0",
-    "next": "^14.2.8",
+    "next": "^14.2.10",
     "next-themes": "^0.3.0",
     "npm-force-resolutions": "^0.0.10",
     "patch-package": "^8.0.0",
