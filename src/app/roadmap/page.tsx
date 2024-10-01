@@ -2,9 +2,9 @@ import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 
 const HeroRoadmap = dynamic(
-  () => import("@/components/UI/roadmap/HeroRoadmap")
+  () => import("@/components/Pages/roadmap/HeroRoadmap")
 );
-const Roadmap = dynamic(() => import("@/components/UI/roadmap/Roadmap"));
+const Roadmap = dynamic(() => import("@/components/Pages/roadmap/Roadmap"));
 
  
 export const metadata: Metadata = {

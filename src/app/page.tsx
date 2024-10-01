@@ -5,12 +5,11 @@ const HomeSkeleton = dynamic(
   () => import("@/components/Skeletons/HomeSkeleton")
 );
 
-const Hero = dynamic(() => import("@/components/UI/home/Hero"),{
-    loading: () => <HomeSkeleton/>,
-  }
-)
-const About = dynamic(() => import("@/components/UI/home/About"));
-const Resources = dynamic(() => import("@/components/UI/home/Resource"));
+const Hero = dynamic(() => import("@/components/Pages/home/Hero"), {
+  loading: () => <HomeSkeleton />,
+});
+const About = dynamic(() => import("@/components/Pages/home/About"));
+const Resources = dynamic(() => import("@/components/Pages/home/Resource"));
 
 
 export default function Home() {

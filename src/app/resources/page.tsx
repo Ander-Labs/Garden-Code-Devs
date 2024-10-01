@@ -1,10 +1,10 @@
 import dynamic from "next/dynamic";
 
 const FormPost = dynamic(
-  () => import("@/components/UI/resource/category/FormPost")
+  () => import("@/components/Pages/resource/category/FormPost")
 );
 const DialogForm = dynamic(
-  () => import("@/components/UI/resource/category/DialogFormCategory")
+  () => import("@/components/Pages/resource/category/DialogFormCategory")
 );
 
 export default function page() {

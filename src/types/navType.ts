@@ -42,6 +42,6 @@ export const ResourceNav: ItemsNav[] = [
   },
   {
     name: "Influencers",
-    href: "/resources/inluencers",
+    href: "/resources/influencers",
   },
 ];

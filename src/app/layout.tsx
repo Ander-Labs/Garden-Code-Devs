@@ -4,9 +4,11 @@ import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/global/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
+import QueryProviders from "./query-provider";
 
 import dynamic from "next/dynamic";
 import GoogleAdsense from "@/scripts/GoogleAdsense";
+
 
 const Navbar = dynamic(() => import("@/components/global/Navbar"));
 const Footer = dynamic(() => import("@/components/global/footer"));
@@ -46,8 +48,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Navbar />
-
-          {children}
+          <QueryProviders>{children}</QueryProviders>
           <Toaster />
           <Footer />
           <NavMobile />

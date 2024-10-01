@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
+import { MoonIcon, SunIcon, DesktopIcon } from "@radix-ui/react-icons";
 import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
@@ -26,12 +26,13 @@ export default function BtnTheme() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
+          <SunIcon className="pr-2 h-[1.4rem] w-[1.4rem]" /> Light
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
+          <MoonIcon className="pr-2 h-[1.4rem] w-[1.4rem]" /> Dark
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("system")}>
+          <DesktopIcon className="pr-2 h-[1.4rem] w-[1.4rem]" />
           System
         </DropdownMenuItem>
       </DropdownMenuContent>

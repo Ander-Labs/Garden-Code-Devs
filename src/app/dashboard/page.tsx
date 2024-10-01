@@ -12,7 +12,7 @@ const DashboardLoanding = dynamic(
   }
 );
 
-const Acount = dynamic(() => import("@/components/UI/dashboard/Acount"), {
+const Acount = dynamic(() => import("@/components/Pages/dashboard/Acount"), {
   loading: () => <DashboardLoanding />,
 });
 
